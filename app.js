@@ -4,7 +4,7 @@ let currentSheetIndex = 0;
 
 // Supabase
 const supabaseUrl = "https://qnvrrkvyczmcdiyagwow.supabase.co";
-const supabaseKey = "DEIN_PUBLIC_KEY";
+const supabaseKey = "sb_publishable_NZ8y8dR56UzMDTpXgxlz8A_FPXGbHTu";
 const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
 
 // OPTIMIEREN
