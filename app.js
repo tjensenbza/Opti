@@ -3,7 +3,7 @@ let lastResult = null;
 let currentSheetIndex = 0;
 
 // Supabase
-const supabaseUrl = "https://fdsedmqvonfsegyfvqwq.supabase.co";
+const supabaseUrl = "https://qnvrrkvyczmcdiyagwow.supabase.co";
 const supabaseKey = "DEIN_PUBLIC_KEY";
 const supabaseClient = supabase.createClient(supabaseUrl, supabaseKey);
 
