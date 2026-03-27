@@ -1,49 +1,35 @@
-function splitFreeRect(freeRect, used) {
-  return [
-    {
-      x: freeRect.x + used.w,
-      y: freeRect.y,
-      w: freeRect.w - used.w,
-      h: used.h
-    },
-    {
-      x: freeRect.x,
-      y: freeRect.y + used.h,
-      w: freeRect.w,
-      h: freeRect.h - used.h
-    }
-  ].filter(r => r.w > 0 && r.h > 0);
+function splitRect(r,u){
+return[
+{x:r.x+u.w,y:r.y,w:r.w-u.w,h:u.h},
+{x:r.x,y:r.y+u.h,w:r.w,h:r.h-u.h}
+].filter(r=>r.w>0&&r.h>0);
 }
 
-function guillotinePack(sheet, cuts) {
+function guillotinePack(sheet,cuts){
 
-  let freeRects = [{
-    x: sheet.marginX,
-    y: sheet.marginY,
-    w: sheet.width - 2*sheet.marginX,
-    h: sheet.height - 2*sheet.marginY
-  }];
+let free=[{
+x:10,y:10,
+w:sheet.width-20,
+h:sheet.height-20
+}];
 
-  let placed = [];
+let placed=[];
 
-  cuts.forEach(cut => {
+cuts.forEach(c=>{
+for(let i=0;i<free.length;i++){
+let r=free[i];
 
-    for (let i=0;i<freeRects.length;i++) {
+if(c.w<=r.w&&c.h<=r.h){
 
-      let r = freeRects[i];
+let n={...c,x:r.x,y:r.y};
+placed.push(n);
 
-      if (cut.w <= r.w && cut.h <= r.h) {
+free.splice(i,1);
+free.push(...splitRect(r,c));
+return;
+}
+}
+});
 
-        let node = { ...cut, x: r.x, y: r.y };
-        placed.push(node);
-
-        freeRects.splice(i,1);
-        freeRects.push(...splitFreeRect(r, cut));
-
-        return;
-      }
-    }
-  });
-
-  return placed;
+return placed;
 }
