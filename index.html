@@ -1,62 +1,76 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <title>Glas Optimizer</title>
+<meta charset="UTF-8">
+<title>Glas Optimizer PRO</title>
 
-  <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css">
 
-  <!-- Supabase -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
-
-  <!-- PDF -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 
 <body>
 
 <div class="app">
 
-  <div class="sidebar">
-    <h2>Projekte</h2>
-    <button onclick="saveProject()">💾 Speichern</button>
-    <button onclick="loadProjects()">📂 Laden</button>
-    <div id="projectList"></div>
-  </div>
+<div class="sidebar">
+<h2>Projekte</h2>
+<button onclick="saveProject()">💾</button>
+<button onclick="loadProjects()">📂</button>
+<div id="projectList"></div>
+</div>
 
-  <div class="main">
+<div class="main">
 
-    <div class="toolbar">
-      <button onclick="optimize()">Optimieren</button>
-      <button onclick="exportCSV()">CSV</button>
-      <button onclick="exportPDF()">PDF</button>
-    </div>
+<div class="topbar">
+<button onclick="optimize()">🚀 Optimieren</button>
+<button onclick="exportMachineCSV()">Maschine CSV</button>
+<button onclick="exportPDF()">PDF</button>
+</div>
 
-    <div class="inputs">
-      Tafel: 
-      <input id="sheetWidth" type="number" value="6000"> x
-      <input id="sheetHeight" type="number" value="3210">
+<div class="content">
 
-      Rand:
-      <input id="marginX" type="number" value="10">
-      <input id="marginY" type="number" value="10">
-    </div>
+<div class="panel">
 
-    <div class="workspace">
-      <canvas id="canvas" width="900" height="600"></canvas>
-    </div>
+<h3>Tafel</h3>
+<input id="sheetWidth" value="6000">
+<input id="sheetHeight" value="3210">
 
-    <div class="bottom">
-      <div id="stats"></div>
-    </div>
+<h3>Zuschnitt</h3>
+<input id="cutW" placeholder="Breite">
+<input id="cutH" placeholder="Höhe">
+<input id="cutQty" value="1">
 
-  </div>
+<button onclick="addCut()">➕</button>
+
+</div>
+
+<div class="canvas-panel">
+<canvas id="canvas" width="900" height="600"></canvas>
+</div>
+
+</div>
+
+<div class="table-panel">
+<table id="cutTable">
+<thead>
+<tr><th>B</th><th>H</th><th></th></tr>
+</thead>
+<tbody></tbody>
+</table>
+</div>
+
+<div id="stats"></div>
+
+</div>
 
 </div>
 
 <script src="remnantManager.js"></script>
 <script src="guillotine.js"></script>
 <script src="optimizer.js"></script>
+<script src="machine.js"></script>
 <script src="app.js"></script>
 
 </body>
